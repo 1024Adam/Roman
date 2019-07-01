@@ -8,8 +8,8 @@ The program takes in a user entered number, and converts the number to roman num
 
 #include "romanTools.h"
 
-int main()
+int main(int argc, char * argv[])
 {
-    convertToRoman();
+    convertToRoman(argc, argv);
     return(0);
 }

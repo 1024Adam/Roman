@@ -1,69 +1,21 @@
 #include "romanTools.h"
 
-void convertToRoman()
+void convertToRoman(int argc, char * argv[])
 {
     char * convert;
     int inputNum = 0;
 
-    printf("Roman Numeral Converter\n");
+    if (argc != 2)
+    {
+        printf("Usage: roman [NumberToConvert]\n");
+	exit(0);
+    }
 
-    inputNum = getInputNum();
+    inputNum = strtol(argv[1], NULL, 10);
     convert = convertNum(inputNum);
-    printf("> %s\n", convert);
-
-    printf("\nPress enter to continue...");
-    getchar();
+    printf("%s\n", convert);
 
     free(convert);
-}
-
-int getInputNum()
-{
-    char buffer[50];
-    int inputNum = 0;
-    int goodNum = 1;
-    int i = 0;
-
-    printf("Please enter an integer value:\n> ");
-    /* Loop until the entered number is valid */
-    do
-    {
-        goodNum = 1;
-        fgets(buffer, 50, stdin);
-
-        if(strcmp(buffer, "\n") == 0)
-        {
-            goodNum = 0;
-        }
-
-        i = 0;
-        while(goodNum && buffer[i] != '\n')
-        {
-            /* Confirm that each character is a digit */
-            if(isdigit(buffer[i]) == 0)
-            {
-                goodNum = 0;
-            }
-            i++;
-        }
-
-        if(strtol(buffer, NULL, 10) >= 100000)
-        {
-            goodNum = 0;
-            printf("Please no number bigger than 100000.");
-        }
-
-        if(!goodNum)
-        {
-            printf("\nPlease enter an integer value only:\n> ");
-        }
-    }
-    while(!goodNum);
-
-    inputNum = strtol(buffer, NULL, 10);
-    /*printf("%d\n", inputNum);*/
-
-    return(inputNum);
 }
 
 int getLengthOfNum(int inputNum)
